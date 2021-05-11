@@ -62,9 +62,17 @@ class TasksController extends Controller
     public function edit($id)
     {
         $task = Task::find($id);
-        $task->isFinished = 1;
-        $task->update();
+
+        if ($task->isFinished == 0) {
+            $task->isFinished = 1;
+            $task->update();
+        }else {
+            $task->isFinished = 0;
+            $task->update();
+        }
+        
         return redirect('/tasks');
+        
     }
 
     /**
