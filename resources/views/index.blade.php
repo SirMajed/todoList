@@ -26,15 +26,11 @@
 
             <div class="flex">
                 <h1 class="text-grey-darkest flex-2"><b>My Todo List</b></h1>
-
-
-                <div class="flex-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6  text-purple-900" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
-                </div>
             </div>
 
 
@@ -59,17 +55,16 @@
 
                 <tbody class="divide-y divide-gray-200">
                     @foreach ($tasks as $task)
-                    <tr>
-                        <td class="px-6 py-4">
+                    <tr class="flex">
+                        <td class="px-6 py-4 flex-1">
                             @if ($task->isFinished == 1)
                             <p class="line-through">{{ $task->name }}</p>
                             @endif
                             {{$task->isFinished == 0 ? $task->name : '' }}
                         </td>
 
-                        <td>
-                            <form style="margin: 0; padding: 0;" method="PATCH"
-                                action="{{ action('TasksController@edit', $task->id) }}">
+                        <td style="padding-right:10px; padding-top:5px;">
+                            <form method="PATCH" action="{{ action('TasksController@edit', $task->id) }}">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="_method" value="PATCH">
 
@@ -83,10 +78,10 @@
                             </form>
                         </td>
 
-                        <td class="pl-1 pr-1"></td>
+                        {{-- <td class="pl-1 pr-1"></td> --}}
                         
-                        <td>
-                            <form method="POST" action="{{ action('TasksController@destroy', $task->id) }}">
+                        <td style="padding-left:10px; padding-top:5px;">
+                            <form  method="POST" action="{{ action('TasksController@destroy', $task->id) }}">
                                 {{ csrf_field() }}
 
                                 <input type="hidden" name="_method" value="DELETE">
@@ -104,13 +99,11 @@
 
                 </tbody>
             </table>
+            
         </div>
 
-
-
-
-
     </div>
+    
 </body>
 
 </html>
